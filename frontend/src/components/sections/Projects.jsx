@@ -72,9 +72,9 @@ const Projects = () => {
       featured: true,
     },
     {
-      title: "MMU Student Resource Platform",
+      title: "MMU Vault - Smart Student Resource Platform",
       description:
-        "A MERN-based platform for MMU students to access notes, PYQs, and assignments with real-time chat and secure end-to-end encrypted communication.",
+        "A MERN-based platform for MMU students to access notes, PYQs, assignments, and college updates. Includes an AI Mentor for personalized guidance, doubt solving, study support, and secure real-time communication.",
 
       image:
         "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=800&q=80",
