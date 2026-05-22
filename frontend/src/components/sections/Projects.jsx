@@ -42,6 +42,33 @@ const Projects = () => {
     "https://mmu-student-tools.netlify.app/",
   featured: false,
 },
+{
+  title: "AI Chatbot - Smart AI Conversation Platform",
+
+  description:
+    "A full-stack AI chatbot platform powered by Groq API, featuring intelligent real-time conversations, fast AI-generated responses, responsive modern UI, and seamless user interaction for an enhanced chat experience.",
+
+  image:
+    "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&q=80",
+
+  tech: [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "Node.js",
+    "Express.js",
+    "MongoDB",
+    "Groq API"
+  ],
+
+  github:
+    "https://github.com/Saketraj234/Ai-Chatbot",
+
+  live:
+    "https://ai-chatbot-snba.onrender.com/",
+
+  featured: false,
+},
     {
       title: "Advanced Scientific Calculator",
       description:
