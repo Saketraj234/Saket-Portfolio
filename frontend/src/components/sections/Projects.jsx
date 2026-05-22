@@ -95,9 +95,9 @@ const Projects = () => {
       featured: true,
     },
     {
-      title: "Video Conferencing Web Application",
+      title: "TeamMeet - Smart Video Conferencing Platform",
       description:
-        "A MERN-based real-time video conferencing web application built with WebRTC and Socket.io, featuring video/audio calls, screen sharing, live chat, meeting recording, and a host-controlled collaborative whiteboard with a responsive modern UI.",
+        "A MERN-based real-time video conferencing platform built with WebRTC and Socket.io, featuring HD video/audio calls, screen sharing, live chat, meeting recording, and a collaborative whiteboard where hosts can teach, guide, and explain concepts in real-time.",
       image:
         "https://images.unsplash.com/photo-1588196749597-9ff075ee6b5b?auto=format&fit=crop&w=800&q=80",
       tech: [
