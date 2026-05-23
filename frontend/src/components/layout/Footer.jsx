@@ -29,7 +29,7 @@ const Footer = () => {
     },
     {
       icon: <FaTwitterSquare />,
-      href: "https://instagram.com",
+      href: "https://x.com/saketraj235",
       label: "Twitter",
     },
   ];
