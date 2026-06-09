@@ -1,21 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import Navbar from './components/layout/Navbar';
-import Footer from './components/layout/Footer';
-import Hero from './components/sections/Hero';
-import About from './components/sections/About';
-import Skills from './components/sections/Skills';
-import Experience from './components/sections/Experience';
-import Projects from './components/sections/Projects';
-import Achievements from './components/sections/Achievements';
-import Contact from './components/sections/Contact';
-import CustomCursor from './components/layout/CustomCursor';
+import Navbar from './Navbar';
+import Footer from './Footer';
+import CustomCursor from './CustomCursor';
 
-function App() {
+const Layout = ({ children }) => {
   const reduceMotion = useReducedMotion();
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = React.useState(false);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const mediaQuery = window.matchMedia('(max-width: 768px)');
     const update = () => setIsMobile(mediaQuery.matches);
     update();
@@ -29,7 +22,6 @@ function App() {
     <div className="min-h-screen premium-bg text-white selection:bg-blue-500/30 selection:text-blue-200">
       <CustomCursor />
       
-      {/* Global Background Elements */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         {allowAmbientMotion ? (
           <>
@@ -61,21 +53,15 @@ function App() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-[0.025] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
       </div>
 
-      <div className="relative z-10">
+      <div className="relative z-10 flex flex-col min-h-screen">
         <Navbar />
-        <main>
-          <Hero />
-          <About />
-          <Skills />
-          <Experience />
-          <Projects />
-          <Achievements />
-          <Contact />
+        <main className="flex-grow pt-24">
+          {children}
         </main>
         <Footer />
       </div>
     </div>
   );
-}
+};
 
-export default App;
+export default Layout;
