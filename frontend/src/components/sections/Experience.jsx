@@ -58,25 +58,25 @@ const Experience = () => {
   ];
 
   return (
-    <section id="experience" className="py-20 bg-transparent relative overflow-hidden">
+    <section id="experience" className="py-16 sm:py-20 bg-transparent relative overflow-hidden">
       <div className="mesh-gradient opacity-10" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-16">
+        <div className="text-center mb-12 sm:mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-5xl sm:text-[3.5rem] font-black text-white mb-10 tracking-tighter">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-6 sm:mb-10 tracking-tighter">
               My <span className="blue-text-gradient animate-pulse">Experience</span>
             </h2>
-            <div className="w-24 h-1.5 bg-blue-600 mx-auto rounded-full shadow-[0_0_20px_rgba(59,130,246,0.6)]" />
+            <div className="w-16 sm:w-24 h-1.5 bg-blue-600 mx-auto rounded-full shadow-[0_0_20px_rgba(59,130,246,0.6)]" />
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
           {experiences.map((exp, index) => (
             <motion.div
               key={index}
@@ -101,11 +101,11 @@ const Experience = () => {
               }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="relative group p-0.5 rounded-[2.5rem] bg-transparent hover:bg-gradient-to-tr from-blue-600/50 to-cyan-400/50 transition-all duration-500"
+              className="relative group p-0.5 rounded-3xl bg-transparent hover:bg-gradient-to-tr from-blue-600/50 to-cyan-400/50 transition-all duration-500"
             >
-              <div className="relative bg-[#081a3a]/75 backdrop-blur-none md:backdrop-blur-2xl rounded-[2.4rem] overflow-hidden border border-white/5 h-full flex flex-col">
-                <div className="relative h-56 overflow-hidden p-6">
-                  <div className="w-full h-full rounded-3xl overflow-hidden relative group-hover:shadow-[0_0_30px_rgba(59,130,246,0.2)] transition-shadow duration-500">
+              <div className="relative bg-[#081a3a]/75 backdrop-blur-none md:backdrop-blur-2xl rounded-[2.3rem] overflow-hidden border border-white/5 h-full flex flex-col">
+                <div className="relative h-44 sm:h-52 md:h-56 overflow-hidden p-4 sm:p-6">
+                  <div className="w-full h-full rounded-2xl sm:rounded-3xl overflow-hidden relative group-hover:shadow-[0_0_30px_rgba(59,130,246,0.2)] transition-shadow duration-500">
                     <img 
                       src={exp.offerImage} 
                       alt={exp.title} 
@@ -119,29 +119,29 @@ const Experience = () => {
                       }}
                     />
                     <div className="hidden flex-col items-center justify-center opacity-30">
-                      <FaBriefcase className="text-6xl text-blue-500" />
+                      <FaBriefcase className="text-4xl sm:text-6xl text-blue-500" />
                     </div>
                     <div className="absolute inset-0 bg-blue-900/20 group-hover:bg-transparent transition-colors duration-500" />
                   </div>
                   
-                  <div className="absolute top-10 right-10 z-20 flex gap-2">
-                    <span className={`px-3 py-1 text-white text-[9px] font-black uppercase tracking-widest rounded-full shadow-lg ${
+                  <div className="absolute top-6 right-6 sm:top-10 sm:right-10 z-20 flex gap-2">
+                    <span className={`px-2.5 py-1 text-white text-[8px] sm:text-[9px] font-black uppercase tracking-widest rounded-full shadow-lg ${
                       exp.status === 'Completed' ? 'bg-green-600' : 'bg-amber-600'
                     }`}>
                       {exp.status}
                     </span>
-                    <span className="px-3 py-1 bg-blue-600 text-white text-[9px] font-black uppercase tracking-widest rounded-full shadow-lg">
+                    <span className="px-2.5 py-1 bg-blue-600 text-white text-[8px] sm:text-[9px] font-black uppercase tracking-widest rounded-full shadow-lg">
                       {exp.type}
                     </span>
                   </div>
                 </div>
 
-                <div className="p-8 pt-0 text-center flex flex-col">
-                  <span className="text-blue-400 text-[10px] font-black uppercase tracking-[0.2em] mb-3 block">
+                <div className="p-6 sm:p-8 pt-0 text-center flex flex-col">
+                  <span className="text-blue-400 text-[9px] sm:text-[10px] font-black uppercase tracking-[0.2em] mb-3 block">
                     {exp.startDate} - {exp.endDate || "Present"}
                   </span>
                   
-                  <h3 className="text-xl font-black text-white mb-4 tracking-tight">
+                  <h3 className="text-lg sm:text-xl font-black text-white mb-4 tracking-tight">
                     {exp.title}
                   </h3>
                   
@@ -149,16 +149,16 @@ const Experience = () => {
                     {exp.company}
                   </p>
 
-                  <div className="mt-auto flex justify-center gap-3 flex-wrap">
+                  <div className="mt-auto flex justify-center gap-2.5 sm:gap-3 flex-wrap">
                     <button 
                       onClick={(e) => {
                         e.stopPropagation();
                         setSelectedItem(exp);
                         setModalType('offer');
                       }}
-                      className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-cyan-500 border border-transparent rounded-full text-white text-[10px] font-black uppercase tracking-widest hover:from-blue-500 hover:to-cyan-400 hover:shadow-[0_0_20px_rgba(59,130,246,0.4)] transition-all"
+                      className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-blue-600 to-cyan-500 border border-transparent rounded-full text-white text-[9px] sm:text-[10px] font-black uppercase tracking-widest hover:from-blue-500 hover:to-cyan-400 hover:shadow-[0_0_20px_rgba(59,130,246,0.4)] transition-all"
                     >
-                      <FaFileAlt size={14} /> View Offer
+                      <FaFileAlt size={12} /> View Offer
                     </button>
                     {exp.certificateImage && (
                       <button 
@@ -167,9 +167,9 @@ const Experience = () => {
                           setSelectedItem(exp);
                           setModalType('certificate');
                         }}
-                        className="flex items-center gap-2 px-5 py-2.5 bg-[#050b1a] border border-white/10 rounded-full text-white text-[10px] font-black uppercase tracking-widest hover:bg-white hover:text-black transition-all"
+                        className="flex items-center gap-2 px-4 py-2.5 bg-[#050b1a] border border-white/10 rounded-full text-white text-[9px] sm:text-[10px] font-black uppercase tracking-widest hover:bg-white hover:text-black transition-all"
                       >
-                        <FaAward size={14} /> View Certificate
+                        <FaAward size={12} /> View Certificate
                       </button>
                     )}
                   </div>
@@ -186,13 +186,13 @@ const Experience = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[200] flex items-center justify-center p-4 sm:p-10 bg-[#050b1a]/98 backdrop-blur-none md:backdrop-blur-2xl"
+            className="fixed inset-0 z-[200] flex items-center justify-center p-4 sm:p-6 bg-[#050b1a]/98 backdrop-blur-none sm:backdrop-blur-md md:backdrop-blur-2xl"
             onClick={() => { setSelectedItem(null); setModalType(null); }}
           >
             <motion.button
               whileHover={{ scale: 1.1, rotate: 90 }}
               whileTap={{ scale: 0.9 }}
-              className="absolute top-8 right-8 text-white/50 hover:text-blue-500 text-4xl transition-colors z-[210]"
+              className="absolute top-4 right-4 sm:top-6 sm:right-6 text-white/50 hover:text-blue-500 text-2xl sm:text-4xl transition-colors z-[210]"
               onClick={() => { setSelectedItem(null); setModalType(null); }}
             >
               <FaTimes />
@@ -203,11 +203,11 @@ const Experience = () => {
               animate={{ scale: 1, y: 0, opacity: 1 }}
               exit={{ scale: 0.9, y: 50, opacity: 0 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative max-w-6xl w-full bg-[#081a3a] rounded-[3rem] overflow-hidden shadow-[0_0_100px_rgba(59,130,246,0.2)] border border-white/5"
+              className="relative max-w-4xl w-full bg-[#081a3a] rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_0_100px_rgba(59,130,246,0.2)] border border-white/5 max-h-[90vh] overflow-y-auto"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="flex flex-col lg:flex-row h-full">
-                <div className="lg:w-3/5 bg-black/40 flex items-center justify-center p-6 sm:p-12 relative overflow-hidden">
+              <div className="flex flex-col">
+                <div className="w-full bg-black/40 flex items-center justify-center p-6 sm:p-8 md:p-12 relative overflow-hidden">
                   <div className="absolute inset-0 bg-blue-600/5 pointer-events-none" />
                   {(() => {
                     const imgSrc = modalType === 'offer' ? selectedItem.offerImage : selectedItem.certificateImage;
@@ -217,7 +217,7 @@ const Experience = () => {
                         alt={selectedItem.title} 
                         loading="lazy"
                         decoding="async"
-                        className="max-w-full max-h-[70vh] object-contain rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-10"
+                        className="max-w-full max-h-[50vh] sm:max-h-[60vh] object-contain rounded-xl sm:rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-10"
                         onError={(e) => {
                           e.target.style.display = 'none';
                           e.target.nextSibling.style.display = 'flex';
@@ -227,19 +227,19 @@ const Experience = () => {
                   })()}
                   <div className="flex flex-col items-center justify-center opacity-30">
                     {modalType === 'offer' ? (
-                      <FaFileAlt className="text-[15rem] text-blue-500" />
+                      <FaFileAlt className="text-6xl sm:text-[10rem] text-blue-500" />
                     ) : (
-                      <FaAward className="text-[15rem] text-blue-500" />
+                      <FaAward className="text-6xl sm:text-[10rem] text-blue-500" />
                     )}
                   </div>
                 </div>
 
-                <div className="lg:w-2/5 p-10 sm:p-16 flex flex-col justify-center bg-gradient-to-br from-[#081a3a] to-[#050b1a] relative">
-                  <div className="absolute top-0 right-0 p-16 opacity-[0.02] pointer-events-none">
+                <div className="w-full p-6 sm:p-8 md:p-12 flex flex-col justify-center bg-gradient-to-br from-[#081a3a] to-[#050b1a] relative">
+                  <div className="absolute top-0 right-0 p-8 sm:p-12 md:p-16 opacity-[0.02] pointer-events-none">
                     {modalType === 'offer' ? (
-                      <FaFileAlt className="text-[20rem] text-blue-500 rotate-12" />
+                      <FaFileAlt className="text-8xl sm:text-[12rem] md:text-[20rem] text-blue-500 rotate-12" />
                     ) : (
-                      <FaAward className="text-[20rem] text-blue-500 rotate-12" />
+                      <FaAward className="text-8xl sm:text-[12rem] md:text-[20rem] text-blue-500 rotate-12" />
                     )}
                   </div>
 
@@ -248,17 +248,17 @@ const Experience = () => {
                       initial={{ opacity: 0, x: 20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.2 }}
-                      className="mb-8 flex gap-3"
+                      className="mb-6 sm:mb-8 flex flex-wrap gap-2 sm:gap-3"
                     >
-                      <span className={`px-5 py-2 text-white text-[10px] font-black uppercase tracking-[0.3em] rounded-full shadow-2xl ${
+                      <span className={`px-3 sm:px-5 py-1.5 sm:py-2 text-white text-[8px] sm:text-[10px] font-black uppercase tracking-[0.3em] rounded-full shadow-2xl ${
                         selectedItem.status === 'Completed' ? 'bg-green-600' : 'bg-amber-600'
                       }`}>
                         {selectedItem.status}
                       </span>
-                      <span className="px-5 py-2 bg-blue-600 text-white text-[10px] font-black uppercase tracking-[0.3em] rounded-full shadow-2xl">
+                      <span className="px-3 sm:px-5 py-1.5 sm:py-2 bg-blue-600 text-white text-[8px] sm:text-[10px] font-black uppercase tracking-[0.3em] rounded-full shadow-2xl">
                         {selectedItem.type}
                       </span>
-                      <span className="px-5 py-2 bg-gradient-to-r from-blue-600 to-cyan-500 text-white text-[10px] font-black uppercase tracking-[0.3em] rounded-full shadow-2xl">
+                      <span className="px-3 sm:px-5 py-1.5 sm:py-2 bg-gradient-to-r from-blue-600 to-cyan-500 text-white text-[8px] sm:text-[10px] font-black uppercase tracking-[0.3em] rounded-full shadow-2xl">
                         {modalType === 'offer' ? 'Offer Letter' : 'Certificate'}
                       </span>
                     </motion.div>
@@ -267,7 +267,7 @@ const Experience = () => {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.3 }}
-                      className="text-4xl font-black text-white mb-6 leading-tight tracking-tight"
+                      className="text-2xl sm:text-3xl md:text-4xl font-black text-white mb-4 sm:mb-6 leading-tight tracking-tight"
                     >
                       {selectedItem.title}
                     </motion.h2>
@@ -276,17 +276,17 @@ const Experience = () => {
                       initial={{ scaleX: 0 }}
                       animate={{ scaleX: 1 }}
                       transition={{ delay: 0.4, duration: 0.8 }}
-                      className="w-20 h-1.5 bg-blue-600 mb-10 rounded-full origin-left"
+                      className="w-16 sm:w-20 h-1.5 bg-blue-600 mb-6 sm:mb-10 rounded-full origin-left"
                     />
                     
-                    <div className="space-y-8">
+                    <div className="space-y-5 sm:space-y-8">
                       <motion.div
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.5 }}
                       >
-                        <p className="text-blue-400 text-[10px] font-black uppercase tracking-[0.3em] mb-2">Company</p>
-                        <p className="text-slate-200 text-xl font-bold">{selectedItem.company}</p>
+                        <p className="text-blue-400 text-[8px] sm:text-[10px] font-black uppercase tracking-[0.3em] mb-2">Company</p>
+                        <p className="text-slate-200 text-lg sm:text-xl font-bold">{selectedItem.company}</p>
                       </motion.div>
                       
                       <motion.div
@@ -294,8 +294,8 @@ const Experience = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.6 }}
                       >
-                        <p className="text-blue-400 text-[10px] font-black uppercase tracking-[0.3em] mb-2">Duration</p>
-                        <p className="text-slate-300 font-medium text-lg">
+                        <p className="text-blue-400 text-[8px] sm:text-[10px] font-black uppercase tracking-[0.3em] mb-2">Duration</p>
+                        <p className="text-slate-300 font-medium text-base sm:text-lg">
                           {selectedItem.startDate} - {selectedItem.endDate || "Present"}
                         </p>
                       </motion.div>
@@ -305,8 +305,8 @@ const Experience = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.7 }}
                       >
-                        <p className="text-blue-400 text-[10px] font-black uppercase tracking-[0.3em] mb-2">Description</p>
-                        <p className="text-slate-400 text-sm leading-relaxed italic border-l-2 border-blue-500/30 pl-6 py-2">
+                        <p className="text-blue-400 text-[8px] sm:text-[10px] font-black uppercase tracking-[0.3em] mb-2">Description</p>
+                        <p className="text-slate-400 text-xs sm:text-sm leading-relaxed italic border-l-2 border-blue-500/30 pl-4 sm:pl-6 py-2">
                           "{selectedItem.description}"
                         </p>
                       </motion.div>
@@ -316,24 +316,24 @@ const Experience = () => {
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ delay: 0.8 }}
-                      className="mt-12 pt-8 border-t border-white/5 flex items-center gap-5"
+                      className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-white/5 flex items-center gap-3 sm:gap-5"
                     >
-                      <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shadow-inner ${
+                      <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-inner ${
                         selectedItem.status === 'Completed' 
                           ? 'bg-green-600/10 text-green-500' 
                           : 'bg-amber-600/10 text-amber-500'
                       }`}>
                         {selectedItem.status === 'Completed' ? (
-                          <FaCheckCircle className="text-xl" />
+                          <FaCheckCircle className="text-lg sm:text-xl" />
                         ) : (
-                          <FaBriefcase className="text-xl" />
+                          <FaBriefcase className="text-lg sm:text-xl" />
                         )}
                       </div>
                       <div>
-                        <p className="text-[10px] font-black uppercase tracking-widest text-white">
+                        <p className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-white">
                           {selectedItem.status === 'Completed' ? 'Successfully Completed' : 'Currently Pursuing'}
                         </p>
-                        <p className="text-[9px] font-medium text-slate-500 uppercase tracking-[0.2em]">
+                        <p className="text-[8px] sm:text-[9px] font-medium text-slate-500 uppercase tracking-[0.2em]">
                           {selectedItem.status === 'Completed' ? 'Internship Finished' : 'In Progress'}
                         </p>
                       </div>

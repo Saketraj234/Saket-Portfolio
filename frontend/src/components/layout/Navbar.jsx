@@ -82,7 +82,6 @@ const Navbar = () => {
       const lastY = lastScrollYRef.current;
       const diff = y - lastY;
       
-      // Threshold to prevent jitter (5px)
       if (Math.abs(diff) < 5 && y > 20) {
         return;
       }
@@ -154,48 +153,48 @@ const Navbar = () => {
           <div className="hidden md:flex items-center gap-6 lg:gap-8">
             {navLinks
               .filter((link) => {
-                // On Experience page, only show Home and Experience
                 if (location.pathname === '/experience') {
                   return link.name === 'Home' || link.name === 'Experience';
                 }
-                // On Home page, show all links
                 return true;
               })
               .map((link) => {
-                // Dynamic type: Home is router link on Experience page, else scroll
-                const isHomeLink = link.name === 'Home';
                 const isOnExperiencePage = location.pathname === '/experience';
                 
-                const dynamicType = isHomeLink && isOnExperiencePage ? 'router' : link.type;
-                const isRouterLinkActive = dynamicType === 'router' && 
-                  ((link.name === 'Experience' && isOnExperiencePage));
-                
-                const LinkComponent = dynamicType === 'router' ? RouterLink : ScrollLink;
-                
-                const linkProps = dynamicType === 'router' 
-                  ? { to: isHomeLink ? '/' : link.to }
-                  : { 
-                      to: link.scrollTo, 
-                      smooth: true, 
-                      duration: 500, 
-                      offset: -70, 
-                      spy: true, 
-                      activeClass: 'active-nav' 
-                    };
+                // Experience Page Links
+                if (isOnExperiencePage) {
+                  const isActive = link.name === 'Experience';
+                  const isHome = link.name === 'Home';
+                  
+                  return (
+                    <RouterLink
+                      key={link.name}
+                      to={isHome ? '/' : link.to}
+                      className={`text-[10px] lg:text-[11px] font-black uppercase tracking-[0.2em] cursor-pointer transition-all relative group ${
+                        isActive ? 'text-white' : 'text-slate-400 hover:text-white'
+                      }`}
+                    >
+                      {link.name}
+                      <span className={`absolute -bottom-4 left-0 h-[2px] bg-gradient-to-r from-blue-600 to-cyan-400 transition-all duration-300 shadow-[0_0_10px_rgba(59,130,246,0.5)] ${
+                        isActive ? 'w-full' : 'w-0 group-hover:w-full'
+                      }`} />
+                    </RouterLink>
+                  );
+                }
 
+                // Home Page Links (Scroll Links)
                 return (
-                  <LinkComponent
+                  <ScrollLink
                     key={link.name}
-                    {...linkProps}
-                    className={`text-[10px] lg:text-[11px] font-black uppercase tracking-[0.2em] cursor-pointer transition-all relative group ${
-                      isRouterLinkActive ? 'text-white' : 'text-slate-400 hover:text-white'
-                    }`}
+                    to={link.scrollTo}
+                    smooth={true}
+                    duration={500}
+                    offset={-70}
+                    className="text-[10px] lg:text-[11px] font-black uppercase tracking-[0.2em] cursor-pointer transition-all relative group text-slate-400 hover:text-white"
                   >
                     {link.name}
-                    <span className={`absolute -bottom-4 left-0 h-[2px] bg-gradient-to-r from-blue-600 to-cyan-400 transition-all duration-300 shadow-[0_0_10px_rgba(59,130,246,0.5)] ${
-                      isRouterLinkActive ? 'w-full' : 'w-0 group-hover:w-full group-[.active-nav]:w-full'
-                    }`} />
-                  </LinkComponent>
+                    <span className="absolute -bottom-4 left-0 h-[2px] bg-gradient-to-r from-blue-600 to-cyan-400 transition-all duration-300 shadow-[0_0_10px_rgba(59,130,246,0.5)] w-0 group-hover:w-full" />
+                  </ScrollLink>
                 );
               })}
           </div>
@@ -230,27 +229,37 @@ const Navbar = () => {
             <div className="flex flex-col items-center gap-12">
               {navLinks
                 .filter((link) => {
-                  // On Experience page, only show Home and Experience
                   if (location.pathname === '/experience') {
                     return link.name === 'Home' || link.name === 'Experience';
                   }
-                  // On Home page, show all links
                   return true;
                 })
                 .map((link, index) => {
-                  // Dynamic type: Home is router link on Experience page, else scroll
-                  const isHomeLink = link.name === 'Home';
                   const isOnExperiencePage = location.pathname === '/experience';
                   
-                  const dynamicType = isHomeLink && isOnExperiencePage ? 'router' : link.type;
-                  const isRouterLinkActive = dynamicType === 'router' && 
-                    ((isHomeLink && isOnExperiencePage) || (link.name === 'Experience' && isOnExperiencePage));
-                  
-                  const LinkComponent = dynamicType === 'router' ? RouterLink : ScrollLink;
-                  
-                  const linkProps = dynamicType === 'router' 
-                    ? { to: isHomeLink ? '/' : link.to }
-                    : { to: link.scrollTo, smooth: true, duration: 500, offset: -80 };
+                  if (isOnExperiencePage) {
+                    const isActive = link.name === 'Experience';
+                    const isHome = link.name === 'Home';
+                    
+                    return (
+                      <motion.div
+                        key={link.name}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.1 * index }}
+                      >
+                        <RouterLink
+                          to={isHome ? '/' : link.to}
+                          onClick={() => setIsOpen(false)}
+                          className={`text-2xl font-bold uppercase tracking-[0.2em] cursor-pointer transition-all ${
+                            isActive ? 'text-blue-500' : 'text-white hover:text-blue-500'
+                          }`}
+                        >
+                          {link.name}
+                        </RouterLink>
+                      </motion.div>
+                    );
+                  }
 
                   return (
                     <motion.div
@@ -259,15 +268,16 @@ const Navbar = () => {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.1 * index }}
                     >
-                      <LinkComponent
-                        {...linkProps}
+                      <ScrollLink
+                        to={link.scrollTo}
+                        smooth={true}
+                        duration={500}
+                        offset={-80}
                         onClick={() => setIsOpen(false)}
-                        className={`text-2xl font-bold uppercase tracking-[0.2em] cursor-pointer transition-all ${
-                          isRouterLinkActive ? 'text-blue-500' : 'text-white hover:text-blue-500'
-                        }`}
+                        className="text-2xl font-bold uppercase tracking-[0.2em] cursor-pointer transition-all text-white hover:text-blue-500"
                       >
                         {link.name}
-                      </LinkComponent>
+                      </ScrollLink>
                     </motion.div>
                   );
                 })}
