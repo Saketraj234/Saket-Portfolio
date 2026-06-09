@@ -126,7 +126,7 @@ const Navbar = () => {
     <motion.nav
       animate={{ 
         y: isVisible ? 0 : -100,
-        backgroundColor: isScrolled ? 'rgba(6, 20, 50, 0.95)' : 'rgba(6, 20, 50, 0)',
+        backgroundColor: isScrolled ? '#061432' : 'rgba(6, 20, 50, 0)',
         paddingTop: isScrolled ? '0.75rem' : '1rem',
         paddingBottom: isScrolled ? '0.75rem' : '1rem',
       }}
@@ -134,7 +134,7 @@ const Navbar = () => {
         duration: 0.3, 
         ease: "easeInOut" 
       }}
-      className="fixed top-0 left-0 w-full z-[100]"
+      className="fixed top-0 left-0 w-full z-[100] backdrop-blur-xl"
     >
       <div className="max-w-[1600px] mx-auto px-6 sm:px-10 lg:px-16">
         <div className="flex items-center justify-between">
