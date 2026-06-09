@@ -25,15 +25,15 @@ const Navbar = () => {
   ];
 
   useEffect(() => {
-    const media = window.matchMedia('(max-width: 767px)');
-    const apply = () => setIsMobile(media.matches);
+    const mediaQuery = window.matchMedia('(max-width: 767px)');
+    const apply = () => setIsMobile(mediaQuery.matches);
     apply();
-    if (typeof media.addEventListener === 'function') {
-      media.addEventListener('change', apply);
-      return () => media.removeEventListener('change', apply);
+    if (typeof mediaQuery.addEventListener === 'function') {
+      mediaQuery.addEventListener('change', apply);
+      return () => mediaQuery.removeEventListener('change', apply);
     }
-    media.addListener(apply);
-    return () => media.removeListener(apply);
+    mediaQuery.addListener(apply);
+    return () => mediaQuery.removeListener(apply);
   }, []);
 
   useEffect(() => {
@@ -127,19 +127,16 @@ const Navbar = () => {
       animate={{ 
         y: isVisible ? 0 : -100,
         backgroundColor: isScrolled ? 'rgba(6, 20, 50, 0.95)' : 'rgba(6, 20, 50, 0)',
-        borderBottomColor: isScrolled ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0)',
-        paddingTop: isScrolled ? '1rem' : '1.25rem',
-        paddingBottom: isScrolled ? '1rem' : '1.25rem',
+        paddingTop: isScrolled ? '0.75rem' : '1rem',
+        paddingBottom: isScrolled ? '0.75rem' : '1rem',
       }}
       transition={{ 
         duration: 0.3, 
         ease: "easeInOut" 
       }}
-      className={`fixed top-0 left-0 w-full z-[100] border-b shadow-lg shadow-black/20 ${
-         isScrolled ? 'md:backdrop-blur-xl' : ''
-       }`}
+      className="fixed top-0 left-0 w-full z-[100]"
     >
-      <div className="max-w-[1600px] mx-auto px-8 sm:px-14 lg:px-20">
+      <div className="max-w-[1600px] mx-auto px-6 sm:px-10 lg:px-16">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <RouterLink to="/" className="cursor-pointer group">
@@ -150,7 +147,7 @@ const Navbar = () => {
           </RouterLink>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-6 lg:gap-8">
+          <div className="hidden md:flex items-center gap-4 lg:gap-6">
             {navLinks
               .filter((link) => {
                 if (location.pathname === '/experience') {
@@ -163,26 +160,34 @@ const Navbar = () => {
                 
                 // Experience Page Links
                 if (isOnExperiencePage) {
-                  const isActive = link.name === 'Experience';
                   const isHome = link.name === 'Home';
                   
                   return (
                     <RouterLink
                       key={link.name}
                       to={isHome ? '/' : link.to}
-                      className={`text-[10px] lg:text-[11px] font-black uppercase tracking-[0.2em] cursor-pointer transition-all relative group ${
-                        isActive ? 'text-white' : 'text-slate-400 hover:text-white'
-                      }`}
+                      className="text-[10px] lg:text-[11px] font-black uppercase tracking-[0.2em] cursor-pointer transition-all relative group text-slate-400 hover:text-white"
                     >
                       {link.name}
-                      <span className={`absolute -bottom-4 left-0 h-[2px] bg-gradient-to-r from-blue-600 to-cyan-400 transition-all duration-300 shadow-[0_0_10px_rgba(59,130,246,0.5)] ${
-                        isActive ? 'w-full' : 'w-0 group-hover:w-full'
-                      }`} />
+                      <span className="absolute -bottom-3 left-0 h-[2px] bg-gradient-to-r from-blue-600 to-cyan-400 transition-all duration-300 w-0 group-hover:w-full" />
                     </RouterLink>
                   );
                 }
 
-                // Home Page Links (Scroll Links)
+                // Home Page Links - check if it's a router link (Experience) or scroll link
+                if (link.type === 'router') {
+                  return (
+                    <RouterLink
+                      key={link.name}
+                      to={link.to}
+                      className="text-[10px] lg:text-[11px] font-black uppercase tracking-[0.2em] cursor-pointer transition-all relative group text-slate-400 hover:text-white"
+                    >
+                      {link.name}
+                      <span className="absolute -bottom-3 left-0 h-[2px] bg-gradient-to-r from-blue-600 to-cyan-400 transition-all duration-300 w-0 group-hover:w-full" />
+                    </RouterLink>
+                  );
+                }
+
                 return (
                   <ScrollLink
                     key={link.name}
@@ -193,7 +198,7 @@ const Navbar = () => {
                     className="text-[10px] lg:text-[11px] font-black uppercase tracking-[0.2em] cursor-pointer transition-all relative group text-slate-400 hover:text-white"
                   >
                     {link.name}
-                    <span className="absolute -bottom-4 left-0 h-[2px] bg-gradient-to-r from-blue-600 to-cyan-400 transition-all duration-300 shadow-[0_0_10px_rgba(59,130,246,0.5)] w-0 group-hover:w-full" />
+                    <span className="absolute -bottom-3 left-0 h-[2px] bg-gradient-to-r from-blue-600 to-cyan-400 transition-all duration-300 w-0 group-hover:w-full" />
                   </ScrollLink>
                 );
               })}
@@ -238,7 +243,6 @@ const Navbar = () => {
                   const isOnExperiencePage = location.pathname === '/experience';
                   
                   if (isOnExperiencePage) {
-                    const isActive = link.name === 'Experience';
                     const isHome = link.name === 'Home';
                     
                     return (
@@ -251,9 +255,27 @@ const Navbar = () => {
                         <RouterLink
                           to={isHome ? '/' : link.to}
                           onClick={() => setIsOpen(false)}
-                          className={`text-2xl font-bold uppercase tracking-[0.2em] cursor-pointer transition-all ${
-                            isActive ? 'text-blue-500' : 'text-white hover:text-blue-500'
-                          }`}
+                          className="text-2xl font-bold uppercase tracking-[0.2em] cursor-pointer transition-all text-white hover:text-blue-500"
+                        >
+                          {link.name}
+                        </RouterLink>
+                      </motion.div>
+                    );
+                  }
+
+                  // Home page mobile links - check link.type
+                  if (link.type === 'router') {
+                    return (
+                      <motion.div
+                        key={link.name}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.1 * index }}
+                      >
+                        <RouterLink
+                          to={link.to}
+                          onClick={() => setIsOpen(false)}
+                          className="text-2xl font-bold uppercase tracking-[0.2em] cursor-pointer transition-all text-white hover:text-blue-500"
                         >
                           {link.name}
                         </RouterLink>
