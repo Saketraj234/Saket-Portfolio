@@ -127,7 +127,7 @@ const Hero = () => {
                 View Projects
               </Link>
               <a
-                href="/Saket Raj Resume .pdf"
+                href="/Saket Resume 1.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto px-10 py-4 border-2 border-slate-700 text-white font-black uppercase tracking-widest rounded-full hover:bg-white hover:text-black hover:border-white transition-all"
