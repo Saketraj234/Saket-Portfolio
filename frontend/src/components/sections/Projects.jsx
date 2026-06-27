@@ -95,7 +95,7 @@ const Projects = () => {
         "Tailwind CSS",
       ],
       github: "https://github.com/Saketraj234/Rail-Connect",
-      live: "https://rail-connect-eight.vercel.app/",
+      live: "https://railconnectwifi.vercel.app/",
       featured: true,
     },
     {
@@ -117,7 +117,7 @@ const Projects = () => {
 
       github: "https://github.com/Saketraj234/MMU-Study-Resources",
 
-      live: "https://mmu-study-resources.vercel.app/",
+      live: "https://mmuvault.vercel.app/",
 
       featured: true,
     },
@@ -138,7 +138,7 @@ const Projects = () => {
       ],
       github:
         "https://github.com/Saketraj234/Video-Conferencing-Web-Application",
-      live: "https://team-meet-liart.vercel.app/",
+      live: "https://teammeetconnect.vercel.app/",
       featured: false,
     },
     {
