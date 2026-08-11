@@ -27,32 +27,21 @@ const Experience = () => {
       company: "Micro Information Technology Services",
       startDate: "May 2025",
       endDate: "June 2025",
-      offerImage: "/Micro IIT Internship 2025.jpg",
+      offerImage: "/Offer Letter Micro IIT.jpg",
       certificateImage: "/Micro IIT Internship 2025.jpg", // You can replace with actual certificate
       description: "1-month remote internship program in Front End Web Development. Learned job-level training and worked on real-life, company-level major projects.",
       status: "Completed",
       type: "Frontend"
     },
     {
-      title: "Full Stack Development Intern",
-      company: "SaiKet Systems",
-      startDate: "May 2026",
-      endDate: null,
-      offerImage: "/Saiket Systems Offer.jpg",
-      certificateImage: null,
-      description: "Internship offer for Full Stack Development. Will work on diverse range of projects requiring expertise in various web technologies, programming languages, and design principles.",
-      status: "Pursuing",
-      type: "Full Stack"
-    },
-    {
       title: "Backend Development Intern",
       company: "CodeAlpha",
       startDate: "June 2026",
-      endDate: null,
+      endDate: "June 2026",
       offerImage: "/CodeAlpha Backend Offer.jpg",
       certificateImage: null,
-      description: "Backend Development Internship at CodeAlpha from 1st June 2026 onwards. Will learn new skills with deeper understanding of concepts through hands-on application.",
-      status: "Pursuing",
+      description: "Completed a Backend Development Internship at CodeAlpha in June 2026, gaining hands-on experience and developing a deeper understanding of backend development concepts.",
+      status: "Completed",
       type: "Backend"
     }
   ];
