@@ -99,9 +99,9 @@ const Projects = () => {
       featured: true,
     },
     {
-      title: "MMU Vault - Smart Student Resource Platform",
+      title: "MMU Vault - Student Learning & Career Platform",
       description:
-        "A MERN-based platform for MMU students to access notes, PYQs, assignments, and college updates. Includes an AI Mentor for personalized guidance, doubt solving, study support, and secure real-time communication.",
+        "A MERN Stack-based platform built for MMU students, combining academic resources, AI-powered learning, coding and placement preparation, campus collaboration, and student-focused digital services in one unified platform.",
 
       image:
         "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=800&q=80",
@@ -112,6 +112,8 @@ const Projects = () => {
         "React.js",
         "Node.js",
         "Socket.io",
+        "Firebase",
+        "Cloudinary",
         "Tailwind CSS",
       ],
 
