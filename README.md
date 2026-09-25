@@ -7,7 +7,6 @@ A clean, modern, and responsive full-stack portfolio website built with the MERN
 - **Frontend**: React, Tailwind CSS, Framer Motion, React Simple Typewriter, React Icons.
 - **Backend**: Node.js, Express, MongoDB (Mongoose).
 - **UI/UX**:
-  - Dark/Light mode toggle.
   - Smooth scroll navigation.
   - Typing effect in the hero section.
   - Interactive project cards.

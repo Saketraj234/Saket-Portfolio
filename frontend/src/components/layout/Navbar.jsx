@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-scroll';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
+import { Link as ScrollLink } from 'react-scroll';
 import { HiMenuAlt3, HiX } from 'react-icons/hi';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -12,26 +13,27 @@ const Navbar = () => {
   const isMobileRef = useRef(false);
   const isOpenRef = useRef(false);
   const isVisibleRef = useRef(true);
+  const location = useLocation();
 
   const navLinks = [
-    { name: 'Home', to: 'home' },
-    { name: 'About', to: 'about' },
-    { name: 'Skills', to: 'skills' },
-    { name: 'Projects', to: 'projects' },
-    { name: 'Achievements', to: 'achievements' },
-    { name: 'Contact', to: 'contact' },
+    { name: 'Home', to: '/', type: 'scroll', scrollTo: 'home' },
+    { name: 'Skills', to: '/', type: 'scroll', scrollTo: 'skills' },
+    { name: 'Experience', to: '/experience', type: 'router' },
+    { name: 'Projects', to: '/', type: 'scroll', scrollTo: 'projects' },
+    { name: 'Achievements', to: '/', type: 'scroll', scrollTo: 'achievements' },
+    { name: 'Contact', to: '/', type: 'scroll', scrollTo: 'contact' },
   ];
 
   useEffect(() => {
-    const media = window.matchMedia('(max-width: 767px)');
-    const apply = () => setIsMobile(media.matches);
+    const mediaQuery = window.matchMedia('(max-width: 767px)');
+    const apply = () => setIsMobile(mediaQuery.matches);
     apply();
-    if (typeof media.addEventListener === 'function') {
-      media.addEventListener('change', apply);
-      return () => media.removeEventListener('change', apply);
+    if (typeof mediaQuery.addEventListener === 'function') {
+      mediaQuery.addEventListener('change', apply);
+      return () => mediaQuery.removeEventListener('change', apply);
     }
-    media.addListener(apply);
-    return () => media.removeListener(apply);
+    mediaQuery.addListener(apply);
+    return () => mediaQuery.removeListener(apply);
   }, []);
 
   useEffect(() => {
@@ -80,7 +82,6 @@ const Navbar = () => {
       const lastY = lastScrollYRef.current;
       const diff = y - lastY;
       
-      // Threshold to prevent jitter (5px)
       if (Math.abs(diff) < 5 && y > 20) {
         return;
       }
@@ -125,46 +126,82 @@ const Navbar = () => {
     <motion.nav
       animate={{ 
         y: isVisible ? 0 : -100,
-        backgroundColor: isScrolled ? 'rgba(6, 20, 50, 0.95)' : 'rgba(6, 20, 50, 0)',
-        borderBottomColor: isScrolled ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0)',
-        paddingTop: isScrolled ? '1rem' : '1.25rem',
-        paddingBottom: isScrolled ? '1rem' : '1.25rem',
+        backgroundColor: isScrolled ? '#061432' : 'rgba(6, 20, 50, 0)',
+        paddingTop: isScrolled ? '0.75rem' : '1rem',
+        paddingBottom: isScrolled ? '0.75rem' : '1rem',
       }}
       transition={{ 
         duration: 0.3, 
         ease: "easeInOut" 
       }}
-      className={`fixed top-0 left-0 w-full z-[100] border-b shadow-lg shadow-black/20 ${
-         isScrolled ? 'md:backdrop-blur-xl' : ''
-       }`}
+      className="fixed top-0 left-0 w-full z-[100] backdrop-blur-xl"
     >
-      <div className="max-w-[1600px] mx-auto px-8 sm:px-14 lg:px-20">
+      <div className="max-w-[1600px] mx-auto px-6 sm:px-10 lg:px-16">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="home" smooth={true} duration={500} className="cursor-pointer group">
+          <RouterLink to="/" className="cursor-pointer group">
             <h1 className="text-xl sm:text-2xl font-black tracking-tighter flex items-center">
               <span className="text-white">Saket</span>
               <span className="blue-text-gradient ml-1.5">Raj</span>
             </h1>
-          </Link>
+          </RouterLink>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-6 lg:gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                to={link.to}
-                smooth={true}
-                duration={500}
-                offset={-70}
-                className="text-slate-400 hover:text-white text-[10px] lg:text-[11px] font-black uppercase tracking-[0.2em] cursor-pointer transition-all relative group"
-                activeClass="active-nav"
-                spy={true}
-              >
-                {link.name}
-                <span className="absolute -bottom-4 left-0 w-0 h-[2px] bg-gradient-to-r from-blue-600 to-cyan-400 transition-all duration-300 group-[.active-nav]:w-full shadow-[0_0_10px_rgba(59,130,246,0.5)]" />
-              </Link>
-            ))}
+          <div className="hidden md:flex items-center gap-4 lg:gap-6">
+            {navLinks
+              .filter((link) => {
+                if (location.pathname === '/experience') {
+                  return link.name === 'Home' || link.name === 'Experience';
+                }
+                return true;
+              })
+              .map((link) => {
+                const isOnExperiencePage = location.pathname === '/experience';
+                
+                // Experience Page Links
+                if (isOnExperiencePage) {
+                  const isHome = link.name === 'Home';
+                  
+                  return (
+                    <RouterLink
+                      key={link.name}
+                      to={isHome ? '/' : link.to}
+                      className="text-[10px] lg:text-[11px] font-black uppercase tracking-[0.2em] cursor-pointer transition-all relative group text-slate-400 hover:text-white"
+                    >
+                      {link.name}
+                      <span className="absolute -bottom-3 left-0 h-[2px] bg-gradient-to-r from-blue-600 to-cyan-400 transition-all duration-300 w-0 group-hover:w-full" />
+                    </RouterLink>
+                  );
+                }
+
+                // Home Page Links - check if it's a router link (Experience) or scroll link
+                if (link.type === 'router') {
+                  return (
+                    <RouterLink
+                      key={link.name}
+                      to={link.to}
+                      className="text-[10px] lg:text-[11px] font-black uppercase tracking-[0.2em] cursor-pointer transition-all relative group text-slate-400 hover:text-white"
+                    >
+                      {link.name}
+                      <span className="absolute -bottom-3 left-0 h-[2px] bg-gradient-to-r from-blue-600 to-cyan-400 transition-all duration-300 w-0 group-hover:w-full" />
+                    </RouterLink>
+                  );
+                }
+
+                return (
+                  <ScrollLink
+                    key={link.name}
+                    to={link.scrollTo}
+                    smooth={true}
+                    duration={500}
+                    offset={-70}
+                    className="text-[10px] lg:text-[11px] font-black uppercase tracking-[0.2em] cursor-pointer transition-all relative group text-slate-400 hover:text-white"
+                  >
+                    {link.name}
+                    <span className="absolute -bottom-3 left-0 h-[2px] bg-gradient-to-r from-blue-600 to-cyan-400 transition-all duration-300 w-0 group-hover:w-full" />
+                  </ScrollLink>
+                );
+              })}
           </div>
 
           {/* Mobile menu button */}
@@ -195,25 +232,77 @@ const Navbar = () => {
             </div>
 
             <div className="flex flex-col items-center gap-12">
-              {navLinks.map((link, index) => (
-                <motion.div
-                  key={link.name}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 * index }}
-                >
-                  <Link
-                    to={link.to}
-                    smooth={true}
-                    duration={500}
-                    offset={-80}
-                    onClick={() => setIsOpen(false)}
-                    className="text-white hover:text-blue-500 text-2xl font-bold uppercase tracking-[0.2em] cursor-pointer transition-all"
-                  >
-                    {link.name}
-                  </Link>
-                </motion.div>
-              ))}
+              {navLinks
+                .filter((link) => {
+                  if (location.pathname === '/experience') {
+                    return link.name === 'Home' || link.name === 'Experience';
+                  }
+                  return true;
+                })
+                .map((link, index) => {
+                  const isOnExperiencePage = location.pathname === '/experience';
+                  
+                  if (isOnExperiencePage) {
+                    const isHome = link.name === 'Home';
+                    
+                    return (
+                      <motion.div
+                        key={link.name}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.1 * index }}
+                      >
+                        <RouterLink
+                          to={isHome ? '/' : link.to}
+                          onClick={() => setIsOpen(false)}
+                          className="text-2xl font-bold uppercase tracking-[0.2em] cursor-pointer transition-all text-white hover:text-blue-500"
+                        >
+                          {link.name}
+                        </RouterLink>
+                      </motion.div>
+                    );
+                  }
+
+                  // Home page mobile links - check link.type
+                  if (link.type === 'router') {
+                    return (
+                      <motion.div
+                        key={link.name}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.1 * index }}
+                      >
+                        <RouterLink
+                          to={link.to}
+                          onClick={() => setIsOpen(false)}
+                          className="text-2xl font-bold uppercase tracking-[0.2em] cursor-pointer transition-all text-white hover:text-blue-500"
+                        >
+                          {link.name}
+                        </RouterLink>
+                      </motion.div>
+                    );
+                  }
+
+                  return (
+                    <motion.div
+                      key={link.name}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.1 * index }}
+                    >
+                      <ScrollLink
+                        to={link.scrollTo}
+                        smooth={true}
+                        duration={500}
+                        offset={-80}
+                        onClick={() => setIsOpen(false)}
+                        className="text-2xl font-bold uppercase tracking-[0.2em] cursor-pointer transition-all text-white hover:text-blue-500"
+                      >
+                        {link.name}
+                      </ScrollLink>
+                    </motion.div>
+                  );
+                })}
             </div>
           </motion.div>
         )}
