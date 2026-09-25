@@ -39,7 +39,7 @@ const Experience = () => {
       startDate: "June 2026",
       endDate: "June 2026",
       offerImage: "/CodeAlpha Backend Offer.jpg",
-      certificateImage: null,
+      certificateImage: "/CodeAlpha Backend Comp.jpeg",
       description: "Completed a Backend Development Internship at CodeAlpha in June 2026, gaining hands-on experience and developing a deeper understanding of backend development concepts.",
       status: "Completed",
       type: "Backend"
