@@ -54,7 +54,7 @@ const About = () => {
     { label: 'Name', value: 'Saket Raj' },
     { label: 'Location', value: 'India' },
     { label: 'Role', value: 'Full Stack Developer & MERN Expert' },
-    { label: 'Education', value: 'B.Tech (3rd Year)' },
+    { label: 'Education', value: 'B.Tech (4th Year)' },
     { label: 'Focus', value: 'Scalable Apps | DSA | Web Architecture' },
   ];
 
@@ -86,7 +86,7 @@ const About = () => {
           <div className="relative p-1.5 rounded-[3.5rem] bg-gradient-to-tr from-blue-600 via-cyan-400 to-purple-500 shadow-[0_0_50px_rgba(59,130,246,0.3)] group cursor-pointer">
             <div className="bg-[#050b1a] rounded-[3.2rem] p-1.5 overflow-hidden">
               <img 
-                src="/profile.png.png" 
+                src="/profile.png" 
                 alt="Saket Raj" 
                 loading="lazy"
                 decoding="async"
@@ -127,7 +127,7 @@ const About = () => {
               className="space-y-6 text-slate-300 text-lg leading-relaxed font-medium"
             >
               <p>
-                I am a driven 3rd-year Engineering student with a deep-rooted passion for architecting <span className="text-blue-400 font-bold drop-shadow-[0_0_10px_rgba(59,130,246,0.3)]">Robust Backend Infrastructures</span> and developing high-performance <span className="text-blue-400 font-bold drop-shadow-[0_0_10px_rgba(59,130,246,0.3)]">Full-Stack Digital Solutions</span>. 
+                I am a driven 4th-year Engineering student with a deep-rooted passion for architecting <span className="text-blue-400 font-bold drop-shadow-[0_0_10px_rgba(59,130,246,0.3)]">Robust Backend Infrastructures</span> and developing high-performance <span className="text-blue-400 font-bold drop-shadow-[0_0_10px_rgba(59,130,246,0.3)]">Full-Stack Digital Solutions</span>.
               </p>
               <p>
                 My expertise lies in bridging complex system requirements with elegant code, specializing in <span className="text-white font-bold underline decoration-blue-500/50 decoration-2 underline-offset-4">Spring Boot, Node.js, and PostgreSQL</span>. With a strong foundation in Data Structures and Algorithms, I am committed to engineering scalable applications that deliver exceptional user experiences.
